@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic HTML Page</title>
+    <script type="application/javascript">
+        function sendToServer() {
+    const eventSource = new EventSource("http://127.0.0.1:8000/stream");
+    console.log(eventSource);
+
+    eventSource.onopen = function(event) {
+        console.log("Connection established.");
+    };
+
+    eventSource.onerror = function(event) {
+        console.error("EventSource failed:", event);
+    };
+
+    eventSource.onmessage = function(event) {
+        console.log("Received message:", event.data);
+        alert("Received message: " + event.data);
+    };
+}
+    </script>
+</head>
+<body>
+
+<button onclick="sendToServer()">Send to Server</button>
+
+</body>
+</html>
